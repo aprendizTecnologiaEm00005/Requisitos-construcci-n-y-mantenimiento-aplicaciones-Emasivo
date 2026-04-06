@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login</title>
+
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: linear-gradient(135deg, #0f172a, #1e293b);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+    }
+
+    .card {
+      background: #ffffff;
+      padding: 40px;
+      width: 360px;
+      border-radius: 12px;
+      box-shadow: 0 20px 40px rgba(0,0,0,0.25);
+    }
+
+    h1 {
+      font-size: 22px;
+      font-weight: 600;
+      margin-bottom: 8px;
+      color: #111;
+    }
+
+    .subtitle {
+      font-size: 13px;
+      color: #666;
+      margin-bottom: 25px;
+    }
+
+    .field {
+      margin-bottom: 18px;
+    }
+
+    label {
+      font-size: 12px;
+      color: #444;
+      display: block;
+      margin-bottom: 6px;
+    }
+
+    input {
+      width: 100%;
+      padding: 12px;
+      border: 1px solid #ddd;
+      border-radius: 6px;
+      font-size: 14px;
+      outline: none;
+      transition: all 0.2s ease;
+    }
+
+    input:focus {
+      border-color: #1e293b;
+      box-shadow: 0 0 0 2px rgba(30, 41, 59, 0.1);
+    }
+
+    .error-input {
+      border-color: #e74c3c;
+    }
+
+    .error-msg {
+      font-size: 12px;
+      color: #e74c3c;
+      margin-top: 5px;
+    }
+
+    .btn {
+      width: 100%;
+      padding: 12px;
+      border: none;
+      background: #1e293b;
+      color: #fff;
+      border-radius: 6px;
+      font-size: 14px;
+      cursor: pointer;
+      margin-top: 10px;
+      transition: all 0.2s;
+    }
+
+    .btn:hover {
+      background: #0f172a;
+    }
+
+    .recuperar {
+      margin-top: 15px;
+      text-align: center;
+    }
+
+    .recuperar a {
+      font-size: 12px;
+      color: #666;
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    .recuperar a:hover {
+      color: #111;
+    }
+
+    .footer {
+      margin-top: 20px;
+      font-size: 12px;
+      color: #888;
+      text-align: center;
+      border-top: 1px solid #eee;
+      padding-top: 10px;
+    }
+
+    .footer strong {
+      color: #111;
+      font-weight: 500;
+    }
+
+  </style>
+</head>
+
+<body>
+
+  <div class="card">
+    <h1>EM-PBI</h1>
+    <p class="subtitle"></p>
+
+    <form method="POST" action="{{ url_for('login') }}">
+
+      <!-- Usuario -->
+      <div class="field">
+        <label>EMAIL</label>
+        <input
+          type="text"
+          name="usuario"
+          value="{{ usuario_ingresado }}"
+          class="{{ 'error-input' if error_usuario else '' }}"
+          required
+        >
+        {% if error_usuario %}
+          <div class="error-msg">{{ error_usuario }}</div>
+        {% endif %}
+      </div>
+
+      <!-- Contraseña -->
+      <div class="field">
+        <label>Contraseña</label>
+        <input
+          type="password"
+          name="password"
+          class="{{ 'error-input' if error_password else '' }}"
+          required
+        >
+        {% if error_password %}
+          <div class="error-msg">{{ error_password }}</div>
+        {% endif %}
+      </div>
+
+      <!-- Botón -->
+      <button class="btn">INGRESAR</button>
+
+      <!-- 🔄 Recuperar contraseña -->
+      <div class="recuperar">
+        <a href="{{ url_for('recuperar') }}">
+          Olvide mi contraseña
+        </a>
+      </div>
+
+    </form>
+
+    <!-- Footer -->
+    <!--<div class="footer">
+     
+    </div>-->
+  </div>
+
+</body>
+</html>
